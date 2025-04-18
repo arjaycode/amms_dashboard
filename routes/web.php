@@ -61,7 +61,7 @@ Route::group(['middleware' => 'auth'], function () {
 		return view('pages.laravel-examples.user-profile');
 	})->name('user-profile');
 });
-
+//my custom routes
 Route::get('/aircraft', function () {
 	return view('aircraft.index');
-})->name('aircraft.index');
+})->middleware('auth')->name('aircraft.index');
