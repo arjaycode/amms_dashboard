@@ -64,3 +64,6 @@ Route::group(['middleware' => 'auth'], function () {
 });
 //my custom routes
 Route::get('/aircrafts', [AircraftController::class, 'index'])->middleware('auth')->name('aircraft.index');
+Route::get('/aircrafts/create', [AircraftController::class, 'create'])->middleware('auth')->name('aircraft.create');
+Route::post('/aircrafts', [AircraftController::class, 'store'])->middleware('auth')->name('aircraft.store');
+Route::delete('/aircrafts/{id}', [AircraftController::class, 'destroy'])->middleware('auth')->name('aircraft.destroy');

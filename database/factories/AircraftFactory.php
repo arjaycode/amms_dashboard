@@ -43,7 +43,7 @@ class AircraftFactory extends Factory
                 'McDonnell Douglas MD-80',
             ]),
             'date_of_manufacture' => fake()->dateTimeBetween('1990-01-01', '2020-12-31')->format('Y-m-d'),
-            'manufacturer_id' => Manufacturer::inRandomOrder()->first()->manufacturer_id,
+            'manufacturer_id' => Manufacturer::inRandomOrder()->first()->id,
             'status_id' => Status::inRandomOrder()->first()->id,
         ];
     }

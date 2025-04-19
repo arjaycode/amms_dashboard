@@ -13,6 +13,6 @@ class AircraftSeeder extends Seeder
      */
     public function run(): void
     {
-        Aircraft::factory()->count(20)->create();
+        Aircraft::factory()->count(50)->create();
     }
 }
