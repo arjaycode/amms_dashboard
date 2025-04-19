@@ -2,7 +2,7 @@
   <x-navbars.sidebar activePage='aircrafts'></x-navbars.sidebar>
   <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
       <!-- Navbar -->
-      <x-navbars.navs.auth titlePage="Manage Aircrafts"></x-navbars.navs.auth>
+      <x-navbars.navs.auth titlePage="Deleted Aircrafts"></x-navbars.navs.auth>
       <!-- End Navbar -->
       <div class="container-fluid py-4">
         @if(session('success'))
@@ -12,10 +12,9 @@
         @endif
           <x-aircraft.content_nav></x-aircraft.content_nav>
           <div class="mx-3">
-            <h4>All Aircrafts</h4>
-
+            <h4>Deleted Aircrafts</h4>
           </div>
-          <table class="table table-hover mx-3">
+          <table class="table table-hover">
             <thead>
               <tr>
                 <th class="text-center" scope="col">#ID</th>
@@ -23,23 +22,30 @@
                 <th class="text-center" scope="col">Date of Manufacture</th>
                 <th class="text-center" scope="col">Manufacturer</th>
                 <th class="text-center" scope="col">Status</th>
+                <th class="text-center" scope="col">Deleted At</th>
                 <th class="text-center" scope="col">Actions</th>
               </tr>
             </thead>
             <tbody>
               @foreach($aircrafts as $aircraft)
-                @if($aircraft->is_deleted != 1)
+                @if($aircraft->is_deleted == 1)
                   <tr>
                     <th class="align-middle text-center" scope="row">{{ $aircraft->id}}</th>
                     <td class="align-middle text-center">{{ $aircraft->model }}</td>
                     <td class="align-middle text-center">{{ $aircraft->date_of_manufacture }}</td>
                     <td class="align-middle text-center">{{ $aircraft->manufacturer->name }}</td>
                     <td class="align-middle text-center">{{ $aircraft->status->name }}</td>
-                    <td class="d-flex flex-row justify-content-center gap-2"><a href="{{ route('aircraft.edit', $aircraft->id) }}}" class="btn btn-outline-secondary m-0" role="button">Edit</a>
-                    <form action="{{ route('aircraft.soft_delete', $aircraft->id) }}" method="POST" class="d-flex flex-row">
+                    <td class="align-middle text-center">{{ $aircraft->deleted_at }}</td>
+                    <td class="d-flex flex-row justify-content-center gap-2 align-middle">
+                    <form action="{{ route('aircraft.restore', $aircraft->id) }}" method="POST" class="d-flex flex-row">
                       @csrf 
                       @method('PUT')
-                      <button type="submit" class="btn btn-outline-primary m-0">Delete</button>
+                      <button type="submit" class="btn btn-outline-secondary m-0">Restore</button>
+                    </form>
+                    <form action="{{ route('aircraft.destroy', $aircraft->id) }}" method="POST" class="d-flex flex-row">
+                      @csrf 
+                      @method('DELETE')
+                      <button type="submit" class="btn btn-outline-primary m-0">Delete Permanently</button>
                     </form></td>
                   </tr>
                 @endif

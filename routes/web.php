@@ -62,10 +62,20 @@ Route::group(['middleware' => 'auth'], function () {
 		return view('pages.laravel-examples.user-profile');
 	})->name('user-profile');
 });
+
+
+
 //my custom routes
 Route::get('/aircrafts', [AircraftController::class, 'index'])->middleware('auth')->name('aircraft.index');
+Route::get('/aircrafts/deleted', [AircraftController::class, 'deleted'])->middleware('auth')->name('aircraft.deleted');
+// Create view and Store routes
 Route::get('/aircrafts/create', [AircraftController::class, 'create'])->middleware('auth')->name('aircraft.create');
 Route::post('/aircrafts', [AircraftController::class, 'store'])->middleware('auth')->name('aircraft.store');
+// Permanent Delete route
 Route::delete('/aircrafts/{aircraft}', [AircraftController::class, 'destroy'])->middleware('auth')->name('aircraft.destroy');
+// Edit view and Update routes
 Route::get('/aircrafts/edit/{aircraft}', [AircraftController::class, 'edit'])->middleware('auth')->name('aircraft.edit');
 Route::put('/aircrafts/update/{aircraft}', [AircraftController::class, 'update'])->middleware('auth')->name('aircraft.update');
+// Soft Delete and Restore routes
+Route::put('/aircrafts/soft-delete/{aircraft}', [AircraftController::class, 'soft_delete'])->middleware('auth')->name('aircraft.soft_delete');
+Route::put('/aircrafts/restore/{aircraft}', [AircraftController::class, 'restore'])->middleware('auth')->name('aircraft.restore');

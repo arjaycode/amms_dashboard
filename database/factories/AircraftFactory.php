@@ -45,6 +45,8 @@ class AircraftFactory extends Factory
             'date_of_manufacture' => fake()->dateTimeBetween('1990-01-01', '2020-12-31')->format('Y-m-d'),
             'manufacturer_id' => Manufacturer::inRandomOrder()->first()->id,
             'status_id' => Status::inRandomOrder()->first()->id,
+            'is_deleted' => false,
+            'deleted_at' => null,
         ];
     }
 }

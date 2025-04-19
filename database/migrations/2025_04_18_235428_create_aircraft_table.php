@@ -17,6 +17,8 @@ return new class extends Migration
             $table->date('date_of_manufacture');
             $table->foreignId('manufacturer_id')->constrained()->onDelete('cascade');
             $table->foreignId('status_id')->constrained()->onDelete('cascade');
+            $table->boolean('is_deleted')->default(false);
+            $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
         });
     }

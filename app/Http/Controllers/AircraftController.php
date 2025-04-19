@@ -41,7 +41,7 @@ class AircraftController extends Controller
     {
         // $aircraft = Aircraft::findOrFail($id);
         $aircraft->delete();
-        return redirect()->route('aircraft.index')->with('success', 'Aircraft deleted successfully');
+        return redirect()->route('aircraft.index')->with('success', 'Aircraft deleted permanently');
     }
 
     public function edit(Aircraft $aircraft)
@@ -63,5 +63,27 @@ class AircraftController extends Controller
 
         $aircraft->update($validatedData);
         return redirect()->route('aircraft.index')->with('success', 'Aircraft updated successfully');
+    }
+
+    public function soft_delete(Aircraft $aircraft)
+    {
+        $aircraft->is_deleted = true;
+        $aircraft->deleted_at = now();
+        $aircraft->save();
+        return redirect()->route('aircraft.index')->with('success', 'Aircraft deleted successfully');
+    }
+
+    public function restore(Aircraft $aircraft)
+    {
+        $aircraft->is_deleted = false;
+        $aircraft->deleted_at = null;
+        $aircraft->save();
+        return redirect()->route('aircraft.index')->with('success', 'Aircraft restored successfully');
+    }
+
+    public function deleted()
+    {
+        $aircrafts = Aircraft::with(['manufacturer', 'status'])->orderBy('created_at', 'desc')->paginate(10);
+        return view('aircraft.deleted', ['aircrafts' => $aircrafts]);
     }
 }
