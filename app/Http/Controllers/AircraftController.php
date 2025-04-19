@@ -37,10 +37,31 @@ class AircraftController extends Controller
         return redirect()->route('aircraft.index')->with('success', 'Aircraft created successfully');
     }
 
-    public function destroy($id)
+    public function destroy(Aircraft $aircraft)
     {
-        $aircraft = Aircraft::findOrFail($id);
+        // $aircraft = Aircraft::findOrFail($id);
         $aircraft->delete();
         return redirect()->route('aircraft.index')->with('success', 'Aircraft deleted successfully');
+    }
+
+    public function edit(Aircraft $aircraft)
+    {
+        $statuses = Status::all();
+        $manufacturers = Manufacturer::all();
+
+        return view('aircraft.edit', ['aircraft' => $aircraft, 'manufacturers' => $manufacturers, 'statuses' => $statuses]);
+    }
+
+    public function update(Request $request, Aircraft $aircraft)
+    {
+        $validatedData = $request->validate([
+            'model' => 'required|string|max:255',
+            'date_of_manufacture' => 'required|date',
+            'manufacturer_id' => 'required|exists:manufacturers,id',
+            'status_id' => 'required|exists:statuses,id',
+        ]);
+
+        $aircraft->update($validatedData);
+        return redirect()->route('aircraft.index')->with('success', 'Aircraft updated successfully');
     }
 }

@@ -30,7 +30,7 @@
                   <td>{{ $aircraft->date_of_manufacture }}</td>
                   <td>{{ $aircraft->manufacturer->name }}</td>
                   <td>{{ $aircraft->status->name }}</td>
-                  <td class="d-flex flex-row justify-content-start gap-2"><a href="#" class="btn btn-outline-secondary m-0" role="button">Edit</a>
+                  <td class="d-flex flex-row justify-content-start gap-2"><a href="{{ route('aircraft.edit', $aircraft->id) }}}" class="btn btn-outline-secondary m-0" role="button">Edit</a>
                   <form action="{{ route('aircraft.destroy', $aircraft->id) }}" method="POST" class="d-flex flex-row">
                     @csrf 
                     @method('DELETE')

@@ -66,4 +66,6 @@ Route::group(['middleware' => 'auth'], function () {
 Route::get('/aircrafts', [AircraftController::class, 'index'])->middleware('auth')->name('aircraft.index');
 Route::get('/aircrafts/create', [AircraftController::class, 'create'])->middleware('auth')->name('aircraft.create');
 Route::post('/aircrafts', [AircraftController::class, 'store'])->middleware('auth')->name('aircraft.store');
-Route::delete('/aircrafts/{id}', [AircraftController::class, 'destroy'])->middleware('auth')->name('aircraft.destroy');
+Route::delete('/aircrafts/{aircraft}', [AircraftController::class, 'destroy'])->middleware('auth')->name('aircraft.destroy');
+Route::get('/aircrafts/edit/{aircraft}', [AircraftController::class, 'edit'])->middleware('auth')->name('aircraft.edit');
+Route::put('/aircrafts/update/{aircraft}', [AircraftController::class, 'update'])->middleware('auth')->name('aircraft.update');
