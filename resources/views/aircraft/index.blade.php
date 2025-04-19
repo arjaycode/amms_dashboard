@@ -5,14 +5,17 @@
       <x-navbars.navs.auth titlePage="Manage Aircrafts"></x-navbars.navs.auth>
       <!-- End Navbar -->
       <div class="container-fluid py-4">
-          <h1 class="mx-3">Hello madafakers</h1>
-          <table class="table table-hover">
+          <div class="container-fluid d-flex justify-content-end">
+            <a href="" class="btn btn-outline-success">Add New Aircraft</a>
+          </div>
+          <table class="table table-hover mx-3">
             <thead>
               <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
+                <th scope="col">#ID</th>
+                <th scope="col">Model</th>
+                <th scope="col">Date of Manufacture</th>
+                <th scope="col">Manufacturer ID</th>
+                <th scope="col">Status</th>
               </tr>
             </thead>
             <tbody>

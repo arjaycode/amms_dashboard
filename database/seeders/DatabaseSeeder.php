@@ -15,10 +15,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-         User::factory()->create([
+        User::factory()->create([
             'name' => 'Admin',
             'email' => 'admin@material.com',
             'password' => ('secret')
         ]);
+        $this->call([ManufacturerSeeder::class, StatusSeeder::class, AircraftSeeder::class]);
     }
 }

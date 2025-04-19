@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AircraftController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -62,6 +63,4 @@ Route::group(['middleware' => 'auth'], function () {
 	})->name('user-profile');
 });
 //my custom routes
-Route::get('/aircraft', function () {
-	return view('aircraft.index');
-})->middleware('auth')->name('aircraft.index');
+Route::get('/aircrafts', [AircraftController::class, 'index'])->middleware('auth')->name('aircraft.index');
