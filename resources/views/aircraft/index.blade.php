@@ -4,7 +4,7 @@
       <!-- Navbar -->
       <x-navbars.navs.auth titlePage="Manage Aircrafts"></x-navbars.navs.auth>
       <!-- End Navbar -->
-      <div class="container-fluid py-4">
+      <div class="container-fluid py-4 px-0">
         @if(session('success'))
           <div class="alert alert-success text-white" role="alert">
             {{ session('success')}}
@@ -15,12 +15,12 @@
             <h4>All Aircrafts</h4>
 
           </div>
-          <table class="table table-hover mx-3">
+          <table class="table table-hover mx-3 px-3">
             <thead>
               <tr>
-                <th class="text-center" scope="col">#ID</th>
+                <th class="text-center" scope="col">Tail Number</th>
                 <th class="text-center" scope="col">Aircraft Model</th>
-                <th class="text-center" scope="col">Date of Manufacture</th>
+                <th class="text-center" scope="col">Year of Manufacture</th>
                 <th class="text-center" scope="col">Manufacturer</th>
                 <th class="text-center" scope="col">Status</th>
                 <th class="text-center" scope="col">Actions</th>
@@ -30,9 +30,9 @@
               @foreach($aircrafts as $aircraft)
                 @if($aircraft->is_deleted != 1)
                   <tr>
-                    <th class="align-middle text-center" scope="row">{{ $aircraft->id}}</th>
+                    <th class="align-middle text-center" scope="row">{{ $aircraft->tail_number}}</th>
                     <td class="align-middle text-center">{{ $aircraft->model }}</td>
-                    <td class="align-middle text-center">{{ $aircraft->date_of_manufacture }}</td>
+                    <td class="align-middle text-center">{{ $aircraft->year_of_manufacture }}</td>
                     <td class="align-middle text-center">{{ $aircraft->manufacturer->name }}</td>
                     <td class="align-middle text-center">{{ $aircraft->status->name }}</td>
                     <td class="d-flex flex-row justify-content-center gap-2"><a href="{{ route('aircraft.edit', $aircraft->id) }}}" class="btn btn-outline-secondary m-0" role="button">Edit</a>
@@ -46,7 +46,7 @@
               @endforeach
             </tbody>
           </table>
-          <div class="py-4">
+          <div class="py-4 px-3">
             {{ $aircrafts->links()}}
           </div>
           <x-footers.auth></x-footers.auth>

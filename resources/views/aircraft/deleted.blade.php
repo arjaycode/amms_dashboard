@@ -4,7 +4,7 @@
       <!-- Navbar -->
       <x-navbars.navs.auth titlePage="Deleted Aircrafts"></x-navbars.navs.auth>
       <!-- End Navbar -->
-      <div class="container-fluid py-4">
+      <div class="container-fluid py-4 px-0">
         @if(session('success'))
           <div class="alert alert-success text-white" role="alert">
             {{ session('success')}}
@@ -17,9 +17,8 @@
           <table class="table table-hover">
             <thead>
               <tr>
-                <th class="text-center" scope="col">#ID</th>
+                <th class="text-center" scope="col">Tail Number</th>
                 <th class="text-center" scope="col">Aircraft Model</th>
-                <th class="text-center" scope="col">Date of Manufacture</th>
                 <th class="text-center" scope="col">Manufacturer</th>
                 <th class="text-center" scope="col">Status</th>
                 <th class="text-center" scope="col">Deleted At</th>
@@ -30,9 +29,8 @@
               @foreach($aircrafts as $aircraft)
                 @if($aircraft->is_deleted == 1)
                   <tr>
-                    <th class="align-middle text-center" scope="row">{{ $aircraft->id}}</th>
+                    <th class="align-middle text-center" scope="row">{{ $aircraft->tail_number}}</th>
                     <td class="align-middle text-center">{{ $aircraft->model }}</td>
-                    <td class="align-middle text-center">{{ $aircraft->date_of_manufacture }}</td>
                     <td class="align-middle text-center">{{ $aircraft->manufacturer->name }}</td>
                     <td class="align-middle text-center">{{ $aircraft->status->name }}</td>
                     <td class="align-middle text-center">{{ $aircraft->deleted_at }}</td>
@@ -52,7 +50,7 @@
               @endforeach
             </tbody>
           </table>
-          <div class="py-4">
+          <div class="py-4 px-3">
             {{ $aircrafts->links()}}
           </div>
           <x-footers.auth></x-footers.auth>

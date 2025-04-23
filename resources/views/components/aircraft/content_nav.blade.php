@@ -1,4 +1,4 @@
-<ul class="nav gap-2 justify-content-end">
+<ul class="nav gap-2 justify-content-end px-3">
   <li class="nav-item">
     <a href="{{ route('aircraft.create') }}" class="btn btn-success nav-link">Add New Aircraft</a>
   </li>
