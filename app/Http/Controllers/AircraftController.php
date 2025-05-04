@@ -28,7 +28,7 @@ class AircraftController extends Controller
         $validatedData = $request->validate([
             'tail_number' => 'required|string|max:255|unique:aircraft,tail_number|regex:/^[A-Z]{1,2}-?[A-Z0-9]{3,5}$/',
             'manufacturer_id' => 'required|exists:manufacturers,id',
-            'model' => 'required|string|max:255',
+            'model' => 'required|string|max:25',
             'year_of_manufacture' => 'required|digits:4|integer|min:1900|max:2025',
             'total_flight_hours' => 'required|numeric',
             'total_landings' => 'required|numeric',

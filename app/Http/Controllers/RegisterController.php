@@ -12,7 +12,8 @@ class RegisterController extends Controller
         return view('register.create');
     }
 
-    public function store(){
+    public function store()
+    {
 
         $attributes = request()->validate([
             'name' => 'required|max:255',
@@ -22,7 +23,7 @@ class RegisterController extends Controller
 
         $user = User::create($attributes);
         auth()->login($user);
-        
+
         return redirect('/dashboard');
-    } 
+    }
 }
